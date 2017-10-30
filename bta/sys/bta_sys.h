@@ -216,11 +216,19 @@ extern void bta_sys_init(void);
 extern void bta_sys_free(void);
 extern void bta_sys_event(BT_HDR* p_msg);
 extern void bta_sys_set_trace_level(uint8_t level);
+#ifdef BOARD_HAVE_FMRADIO_BCM
+extern "C" void bta_sys_register(uint8_t id, const tBTA_SYS_REG* p_reg);
+#else
 extern void bta_sys_register(uint8_t id, const tBTA_SYS_REG* p_reg);
+#endif
 extern void bta_sys_deregister(uint8_t id);
 extern bool bta_sys_is_register(uint8_t id);
 extern uint16_t bta_sys_get_sys_features(void);
+#ifdef BOARD_HAVE_FMRADIO_BCM
+extern "C" void bta_sys_sendmsg(void* p_msg);
+#else
 extern void bta_sys_sendmsg(void* p_msg);
+#endif
 extern void bta_sys_start_timer(alarm_t* alarm, period_ms_t interval,
                                 uint16_t event, uint16_t layer_specific);
 extern void bta_sys_disable(tBTA_SYS_HW_MODULE module);
